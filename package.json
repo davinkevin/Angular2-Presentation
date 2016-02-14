@@ -1,9 +1,7 @@
 {
-  "name": "reveal.js",
-  "version": "3.2.0",
-  "description": "The HTML Presentation Framework",
-  "homepage": "http://lab.hakim.se/reveal-js",
-  "subdomain": "revealjs",
+  "name": "Angular2",
+  "version": "1.0.0",
+  "description": "Presentation of Angular2",
   "main": "js/reveal.js",
   "scripts": {
     "test": "grunt test",
