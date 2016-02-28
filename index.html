@@ -205,6 +205,70 @@ injector.get(Engine) !== childInjector.get(Engine);</code></pre>
                 <img src="img/childInjector.png" alt="childinjector">
             </section>
         </section>
+        <section id="zones">
+            <section>
+                <h3>Zones.js</h3>
+                <p>Zones are simply an <b>Execution context</b></p>
+                <p>It helps to handle asynchronous code in JS</p>
+                <p>Extract from <b>Dart</b>, alternative to Domains in NodeJS</p>
+            </section>
+            <section>
+                <h3><a target="_blank" href="examples/zones/javascript.101.html">Javascript 101</a></h3>
+                <pre><code class="hljs javascript" data-trim>function cf(name) { return function() { console.log(name); } };
+var a = cf('a'), b = cf('b'), c = cf('c'), d = cf('d');
+
+a();
+setTimeout(b, 0);
+setTimeout(c, 0);
+d();</code></pre>
+                <p>Results to </p>
+                <pre><code class="hljs javascript" data-trim>a
+d
+b
+c</code></pre>
+                <p>All the async tasks are added to the event queue and executed when other tasks are finished</p>
+            </section>
+            <section>
+                <h3>How long does it take ?</h3>
+                <pre><code class="hljs javascript" data-trim>start();
+a();
+setTimeout(b, 0);
+setTimeout(c, 0);
+d();
+stop();</code></pre>
+                <p>Results :</p>
+                <pre><code class="hljs javascript" data-trim>// Start
+a
+d
+// Stop
+b // Missed
+c // Missed</code></pre>
+            </section>
+            <section>
+                <h3><a href="examples/zones/sort-async.html"></a>What need to be done ?</h3>
+                <img src="img/zones/execution-without-zones.png" alt="no-zones">
+                <img src="img/zones/execution-in-zones.png" alt="with-zones">
+                <p>Hooks of zones help us to keep track of the async call</p>
+            </section>
+            <section>
+                <h3>Why are we talking about this ?</h3>
+                <p>Let's consider a framework, for example AngularJS with this: </p>
+                <pre><code class="hljs javascript" data-trim>var $rootScope;
+zone
+    .fork({
+        afterTask : function() {
+            $rootScope.$digest();
+        }
+    })
+    .run(function() {
+        angular.bootstrap(document, aModule);
+        $rootScope = angular
+            .element(document)
+            .injector()
+            .get('$rootScope');
+    });</code></pre>
+            </section>
+        </section>
 
     </div>
 

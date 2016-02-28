@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript 101</title>
+</head>
+<body>
+
+    <h3>Launch multiple task : </h3>
+    <button id="b1">Click me :D</button>
+
+    <script>
+        function main () {
+            b1.addEventListener('click', launch);
+        }
+
+        function cf(name) {
+            return function() {
+                console.log(name);
+            };
+        }
+
+        var a = cf('a'), b = cf('b'), c = cf('c'), d = cf('d');
+
+        function launch() {
+            a();
+            setTimeout(b, 0);
+            setTimeout(c, 0);
+            d();
+        }
+
+        main();
+    </script>
+</body>
+</html>
