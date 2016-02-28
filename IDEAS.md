@@ -49,3 +49,4 @@ Etat d'angular et ANgular2 aujourd'hui
 Lecture : 
 * Ninja-Squad : Angular2
 * Nouveau styleGuide
+* ng-book 2
