@@ -1,8 +1,18 @@
 
 .reveal section {
-  img.borderless {
+
+  .borderless {
     background: none;
     border: none;
     box-shadow: none;
+  }
+
+  .split-left {
+    float: left;
+    width: 50%;
+  }
+  .split-right {
+    float: right;
+    width: 50%;
   }
 }

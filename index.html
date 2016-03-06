@@ -94,7 +94,7 @@
             </section>
             <section>
                 <h3>@tscript...?</h3>
-                <p>A extension of Javascript should be the language of reference</p>
+                <p>An extension of Javascript should have been the reference language</p>
                 <img src="img/microsoft-google.png" alt="microsoft-google" style="background: white">
                 <p>But Google/Microsoft teams-up to improve TypeScript</p>
             </section>
@@ -274,8 +274,50 @@ zone
             .get('$rootScope');
     });</code></pre>
             </section>
+            <section>
+                <h3><a href="examples/zones/sort-async.html">Demo time</a></h3>
+            </section>
         </section>
-
+        <section>
+            <section>
+                <h3>SystemJS</h3>
+                <p>A polifyll for ES2017 (?) module loader</p>
+            </section>
+            <section>
+                <h3>Module dependency done easy</h3>
+                <p>In AngularJS (it's so 2009...)</p>
+                <pre><code>angular.module('FooModule', [
+ 'BarModule',
+ 'anotherModule'
+]);</code></pre>
+                <div class="fragment">
+                    <p>In ES2015 & SystemJS</p>
+                    <pre><code>import { Component, OnInit } from 'angular2/core';</code></pre>
+                </div>
+                <p class="fragment">Simple to maintain !</p>
+            </section>
+            <section>
+                <h3>Is it worth it ?</h3>
+                <p>Angular2 is fully modular</p>
+                <p>Reduce the size of the app depending of what your app need</p>
+            </section>
+            <section data-background="img/systemjs/mrpotato.jpg">
+            </section>
+            <section>
+                <h3>Only SystemJS ?</h3>
+                <p>No... you can use what you want</p>
+                <div class="split-left">
+                    <img src="img/systemjs/webpack.png" alt="webpack" height="192">
+                    <br>
+                    <a href="https://webpack.github.io/docs/">Webpack</a>
+                </div>
+                <div class="split-right">
+                    <img src="img/systemjs/jspm.png" alt="jspm" height="192">
+                    <br>
+                    <a href="http://jspm.io/">JSPM</a>
+                </div>
+            </section>
+        </section>
     </div>
 
 </div>

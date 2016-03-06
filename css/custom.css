@@ -1,4 +1,12 @@
-.reveal section img.borderless {
+.reveal section .borderless {
   background: none;
   border: none;
   box-shadow: none; }
+
+.reveal section .split-left {
+  float: left;
+  width: 50%; }
+
+.reveal section .split-right {
+  float: right;
+  width: 50%; }
