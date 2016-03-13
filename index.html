@@ -64,8 +64,8 @@
                 <li><a href="#/mythbuster">Myth-busters</a></li>
                 <li><a href="#/frameworks">One framework or many framework ?</a></li>
                 <li><a href="#/languages">Many languages...</a></li>
+                <li><a href="#/deepdive">Deep dive in Angular2</a></li>
                 <li>Beyond the browser</li>
-                <li>Deep dive in Angular2</li>
             </ul>
         </section>
 
@@ -93,7 +93,7 @@
                 <p>The AngularTeam work hard to improve <b>Migration Path</b></p>
             </section>
             <section>
-                <h3>@tscript...?</h3>
+                <h3>AtScript...?</h3>
                 <p>An extension of Javascript should have been the reference language</p>
                 <img src="img/microsoft-google.png" alt="microsoft-google" style="background: white">
                 <p>But Google/Microsoft teams-up to improve TypeScript</p>
@@ -112,7 +112,7 @@
                 </ul>
             </section>
             <section>
-                <h3>Angular2 is a micro-framework</h3>
+                <h3>Angular2 is a m*cro-framework</h3>
                 <ul>
                     <li><a href="https://github.com/angular/di.js">DI.js</a> (Angular2 dependency injector)</li>
                     <li><a href="https://github.com/angular/zone.js/">Zones.js</a></li>
@@ -169,8 +169,8 @@ let injector = Injector.resolveAndCreate([
   Tires
 ]);
 
-var car = injector.get(Car);</code></pre>
-                <pre><code class="hljs javascript" data-trim>import { Injector, provide } from 'angular2/core';
+let car = injector.get(Car);</code></pre>
+                <pre class="fragment"><code class="hljs javascript" data-trim>import { Injector, provide } from 'angular2/core';
 ...
 let injector = Injector.resolveAndCreate([
   provide(Car, {useClass: Car}),
@@ -196,7 +196,7 @@ let injector = Injector.resolveAndCreate([
             </section>
             <section>
                 <h3>Injector(s)</h3>
-                <p>Singleton only inside the same injector</p>
+                <p>Singleton only inside the same injectors</p>
                 <pre><code class="hljs javascript" data-trim>import { Injector } from 'angular2/core';
 
 let injector = Injector.resolveAndCreate([Engine]);
@@ -213,9 +213,14 @@ injector.get(Engine) !== childInjector.get(Engine);</code></pre>
         <section id="zones">
             <section>
                 <h3>Zones.js</h3>
-                <p>Zones are simply an <b>Execution context</b></p>
+                <p>Zones are simply an <b>Execution context</b> for Javascript</p>
+            </section>
+            <section data-background-image="img/zones/explosion.gif"></section>
+            <section data-transition="none-in">
+                <h3>Zones.js</h3>
+                <p>Zones are simply an <b>Execution context</b> for Javascript</p>
                 <p>It helps to handle asynchronous code in JS</p>
-                <p>Extract from <b>Dart</b>, alternative to Domains in NodeJS</p>
+                <p>Extract from <b>Dart Lang</b>, alternative to <i>Domains</i> in NodeJS</p>
             </section>
             <section>
                 <h3><a target="_blank" href="examples/zones/javascript.101.html">Javascript 101</a></h3>
@@ -226,12 +231,14 @@ a();
 setTimeout(b, 0);
 setTimeout(c, 0);
 d();</code></pre>
+                <div class="fragment">
                 <p>Results to </p>
                 <pre><code class="hljs javascript" data-trim>a
 d
 b
 c</code></pre>
-                <p>All the async tasks are added to the event queue and executed when other tasks are finished</p>
+                </div>
+                <p class="fragment">All the async tasks are added to the event queue and executed when other tasks are finished</p>
             </section>
             <section>
                 <h3>How long does it take ?</h3>
@@ -241,6 +248,7 @@ setTimeout(b, 0);
 setTimeout(c, 0);
 d();
 stop();</code></pre>
+                <div class="fragment">
                 <p>Results :</p>
                 <pre><code class="hljs javascript" data-trim>// Start
 a
@@ -248,12 +256,15 @@ d
 // Stop
 b // Missed
 c // Missed</code></pre>
+                </div>
             </section>
-            <section>
-                <h3><a href="examples/zones/sort-async.html"></a>What need to be done ?</h3>
+            <section data-transition="none-out">
+                <h3><a href="examples/zones/sort-async.html">What need to be done ?</a></h3>
                 <img src="img/zones/execution-without-zones.png" alt="no-zones">
+            </section>
+            <section data-transition="none">
+                <h3><a href="examples/zones/sort-async.html">What need to be done ?</a></h3>
                 <img src="img/zones/execution-in-zones.png" alt="with-zones">
-                <p>Hooks of zones help us to keep track of the async call</p>
             </section>
             <section>
                 <h3>Why are we talking about this ?</h3>
@@ -291,7 +302,8 @@ zone
 ]);</code></pre>
                 <div class="fragment">
                     <p>In ES2015 & SystemJS</p>
-                    <pre><code>import { Component, OnInit } from 'angular2/core';</code></pre>
+                    <pre><code>import { BarModule } from './Bar.comp';
+import { AnotherComp } from './another.comp';</code></pre>
                 </div>
                 <p class="fragment">Simple to maintain !</p>
             </section>
@@ -339,17 +351,162 @@ zone
                 <img src="img/languages/sets.png" alt="sets">
             </section>
             <section>
-                <h3>So you can write Angular2 in old javascript</h3>
-                <pre><code>var Todo = ng
+                <h3>So you can write Angular2 in Plain Old Javascript</h3>
+                <pre><code>var TodoComp = ng
 .Component({
  selector: 'todo',
  templateUrl: '../partials/todo.html'
 })
 .Class({
- constructor: function () {}
+ constructor: function (heroService, routeParams) {}
  select(todo){...}
 });</code></pre>
                 <p>But, it isn't as fun as evolved JS</p>
+            </section>
+            <section>
+                <h3>Or with Type and Decorators !</h3>
+                <pre><code>@Component({
+ selector: 'todo',
+ templateUrl: '../partials/todo.html'
+})
+export class TodoComp {
+    constructor(private heroService: HeroService, private routeParams: RouteParams){}
+    select(todo){...}
+}</code></pre>
+            </section>
+        </section>
+        <section id="deepdive">
+            <section>
+                <h3>Angular2</h3>
+                <p>All is about Component</p>
+                <p class="fragment">EVERYWHERE !</p>
+            </section>
+            <section data-background="img/deepdive/blocks.gif"></section>
+            <section>
+                <h3>An app are just some buildings block</h3>
+                <img src="img/deepdive/tree.svg" alt="tree" class="borderless">
+            </section>
+            <section>
+                <h3>A Component is</h3>
+                <p><span class="fragment">Controller </span><span class="fragment">+ Template </span><span class="fragment">(+ optional RouteConfig)</span></p>
+            </section>
+            <section data-transition="none-out">
+                <h3>And Components have an intuitive LifeCycle</h3>
+                <ul>
+                    <li><b>OnChange</b><span class="fragment"> - input|output binding value changes</span></li>
+                    <li><b>OnInit</b><span class="fragment"> - after the 1st OnChange</span></li>
+                    <li><b>DoCheck</b><span class="fragment"> - dev's custom change detection</span></li>
+                    <li><b>AfterContentInit</b><span class="fragment"> - after comp content initialized</span></li>
+                    <li><b>AfterContentChecked</b><span class="fragment"> - after every check of comp content</span></li>
+                    <li><b>AfterViewInit</b><span class="fragment"> - after comp's view(s) are initialized</span></li>
+                    <li><b>AfterViewChecked</b><span class="fragment"> - after every check of a comp's view(s)</span></li>
+                    <li><b>OnDestroy</b><span class="fragment"> - just before destruction</span></li>
+                </ul>
+            </section>
+            <section>
+                <h3>And we can use Interface to declare it</h3>
+                <pre><code class="hljs javascript">import { Component, OnInit } from 'angular2/core';
+
+@Component({
+ selector: 'todo',
+ templateUrl: '../partials/todo.html'
+})
+export class TodoComp implements OnInit {
+  constructor(private heroService: HeroService, private routeParams: RouteParams){}
+  ngOnInit() {
+    console.log('The Component is initialised');
+  }
+}</code></pre>
+            <p class="fragment">No more headache with [pre|post]link and compile</p>
+            </section>
+
+<!--            <section>
+                <h3>How to start my app ?</h3>
+                <p class="fragment">No more ng-app, directly from js</p>
+                <pre class="fragment"><code class="hljs javascript">// main.ts
+import {bootstrap} from 'angular2/platform/browser';
+import {AppComponent} from './app.component';
+
+bootstrap(AppComponent);</code></pre>
+            </section>
+            <section>
+                <h3>Component</h3>
+                <pre><code>@Component({
+    selector: 'my-app',
+    templateUrl : 'app.html'
+})
+export class AppComponent{}</code></pre>
+                <pre class="fragment"><code class="hljs html">&ltmy-app&gtLoading...&lt/my-app&gt</code></pre>
+            </section>-->
+        </section>
+        <section id="template">
+            <section>
+                <h3>Template</h3>
+                <pre><code class="hljs html">&ltdiv&gtMy title is {{ title }}&lt/div&gt</code></pre>
+            </section>
+            <section>
+                <h3>Property Bindings</h3>
+                <p>No more ng-XXX directives</p>
+                <p class="fragment">Instead, we use standard HTML for property binding</p>
+                <div class="fragment">
+                    <pre><code class="hljs html">&lth3 ng-hide="vm.isHidden" ng-class="{active : favoriteHero === hero }" &gt
+  Your favorite hero is: {{ vm.favoriteHero }}
+&lt/h3&gt</code></pre>
+                </div>
+                <div class="fragment">
+                    <p>becomes...</p>
+                    <pre><code class="hljs html">&lth3 [hidden]="isHidden" [class.active]="favoriteHero === hero" &gt
+  Your favorite hero is: {{ favoriteHero }}
+&lt/h3&gt</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>Event Bindings</h3>
+                <p>Really no more ng-XXX directives</p>
+                <p class="fragment">Again, we use standard HTML for event binding</p>
+                <div class="fragment">
+                    <pre><code class="hljs html">&ltinput ng-click="vm.send(foo)"&gtClick me !&lt/input&gt</code></pre>
+                </div>
+                <div class="fragment">
+                    <p>becomes...</p>
+                    <pre><code class="hljs html">&ltinput (click)="send($event)"&gtClick me !&lt/input&gt</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>And the 'magical' two-way binding ?</h3>
+                <p>It disappears (in Angular2 Apha), so we have to do it manually</p>
+                <pre><code class="hljs html">&ltinput [value]="hero.firstName"
+       (input)="hero.firstName=$event.target.value" &gt</code></pre>
+            </section>
+            <section data-background="img/deepdive/sad.gif"></section>
+            <section>
+                <h3>NgModel Directive</h3>
+                <p>The API evolves to introduce a syntax for the two-way binding in latest Alpha</p>
+                <pre><code class="hljs html">&ltinput [(ngModel)]="hero.firstname"&gt</code></pre>
+                <p>This syntax is a mix between property and event bindings</p>
+            </section>
+            <section data-background="img/deepdive/twowaybinding.png"></section>
+            <section>
+                <h3>Structural Directive</h3>
+                <p>All the directive inducing a dom modification outside of the current element are called <b>Structural Directive</b></p>
+                <ul>
+                    <li>ng-if</li>
+                    <li>ng-switch</li>
+                    <li>ng-repeat</li>
+                </ul>
+            </section>
+            <section>
+                <h3>In Angular2, the syntax is kind of special...</h3>
+                <pre><code class="hljs html">&ltp *ngIf="condition"&gt
+  condition is true and ngIf is true.
+&lt/p&gt</code></pre>
+                <pre><code class="hljs html">&lttr *ngFor="#movie of movies"&gt{{movie.name}}&lt/tr&gt</code></pre>
+            </section>
+            <section>
+                <h3>Local template variable</h3>
+                <p>We can define a template variable associated to a dom element</p>
+                <pre><code class="hljs html">&ltvideo #player src="foo.mp4"&gt&lt/video&gt
+&ltbutton (click)="player.play()"&gt&lt/button&gt</code></pre>
             </section>
         </section>
     </div>
@@ -378,7 +535,9 @@ zone
             { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
             { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
             { src: 'plugin/zoom-js/zoom.js', async: true },
-            { src: 'plugin/notes/notes.js', async: true }
+            { src: 'plugin/notes/notes.js', async: true },
+            { src: 'socket.io/socket.io.js', async: true },
+            { src: 'plugin/notes-server/client.js', async: true }
         ]
     });
 
