@@ -71,7 +71,7 @@
 
         <section id="mythbuster">
             <section>
-                <img data-src="img/mythbusters.png" alt="mythbusters" class="borderless" height="128">
+                <img data-src="img/mythbusters.png" alt="mythbusters" class="borderless" height="256">
                 <p>Since
                     <a href="https://www.youtube.com/watch?v=gNmWybAyBHI">NG-Europe 2014 and the announcement of Angular2</a>
                     , a lots of change have been made...
@@ -117,7 +117,7 @@
                     <li><a href="https://github.com/angular/di.js">DI.js</a> (Angular2 dependency injector)</li>
                     <li><a href="https://github.com/angular/zone.js/">Zones.js</a></li>
                     <li><a href="https://github.com/systemjs/systemjs">SystemJs</a></li>
-                    <li>Native browser selector (document.querySelectorAll...)</li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Native browser API</a></li>
                 </ul>
             </section>
         </section>
@@ -327,6 +327,71 @@ import { AnotherComp } from './another.comp';</code></pre>
                     <br>
                     <a href="http://jspm.io/">JSPM</a>
                 </div>
+            </section>
+        </section>
+        <section id="nativebrowserapi">
+            <section>
+                <h3>An after jQuery-World</h3>
+                <img src="img/nativebrowserapi/jquery.svg" alt="jquery" style="background-color: white">
+                <p>Born in 2006 and help a lot of Web developers...</p>
+            </section>
+            <section>
+                <h3>In AngularJS, we use jQuery Lite</h3>
+                <p>Good fallback to do more in a complicated world</p>
+                <img src="img/nativebrowserapi/ie8.jpg" alt="ie8" width="512" class="fragment">
+            </section>
+            <section>
+                <h3>But now, we need to be serious because...</h3>
+                <img src="img/nativebrowserapi/iedie.jpeg" alt="iedie" class="fragment">
+            </section>
+            <section data-background="img/nativebrowserapi/party.gif">
+                <p><a href="https://www.microsoft.com/fr-fr/WindowsForBusiness/End-of-IE-support">Since January, the 12th 2016 !</a></p>
+            </section>
+            <section>
+                <h3>HTML5 API's are just enough !</h3>
+                <img src="img/nativebrowserapi/mdn.png" alt="mdn" class="borderless">
+            </section>
+            <section>
+                <h3>CSS3 query Selectors</h3>
+                <pre><code class="hljs javascript">let firstClass = document.querySelector('.some-class');
+let allOfClass = document.querySelectorAll('.some-class');</code></pre>
+            </section>
+            <section>
+                <h3>CSS class manipulation</h3>
+                <pre><code class="hljs javascript">let elem = document.querySelector('#some-element');
+
+elem.classList.add('some-class'); // Add class
+elem.classList.remove('some-other-class'); // Remove class
+elem.classList.toggle('some-other-class') // ...toggle...
+elem.classList.contains('some-third-class') // Does it have some class ?</code></pre>
+                <div class="fragment">
+                    <p>Same thing on inline style...</p>
+                    <pre><code class="hljs javascript">elem.style.color; // Get a CSS attribute
+elem.style.color = 'rebeccapurple'; // Set a CSS attribute
+elem.style.minHeight; // Get a CSS attribute
+elem.style.minHeight = '200px'; // Set a CSS attribute</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>Working with Event</h3>
+                <pre><code class="hljs javascript">let elem = document.querySelector('#some-element');
+
+elem.addEventListener('click', () => console.log('clicked'), false);
+elem.addEventListener('customEvent', anotherFunction, false);</code></pre>
+            </section>
+            <section>
+                <h3>Navigating into the dom</h3>
+                <pre><code class="hljs javascript">let elem = document.querySelector('#some-element');
+
+let parent = elem.parentNode;
+let childs = elem.childNodes;
+
+let specificChild = elem.querySelector('anotherClass');
+let specificChilds = elem.querySelectorAll('anotherClass');</code></pre>
+            </section>
+            <section>
+                <h3>And about perf ?</h3>
+                <img src="img/nativebrowserapi/perf.jpg" alt="perf">
             </section>
         </section>
         <section id="languages">
