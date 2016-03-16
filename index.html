@@ -430,12 +430,16 @@ let specificChilds = elem.querySelectorAll('anotherClass');</code></pre>
             </section>
             <section>
                 <h3>Or with Type and Decorators !</h3>
-                <pre><code>@Component({
+                <pre><code class="hljs javascript">@Component({
  selector: 'todo',
  templateUrl: '../partials/todo.html'
 })
 export class TodoComp {
-    constructor(private heroService: HeroService, private routeParams: RouteParams){}
+    constructor(
+        private heroService: HeroService,
+        private routeParams: RouteParams
+    ){}
+
     select(todo){...}
 }</code></pre>
             </section>
@@ -453,10 +457,207 @@ export class TodoComp {
             </section>
             <section>
                 <h3>A Component is</h3>
-                <p><span class="fragment">Controller </span><span class="fragment">+ Template </span><span class="fragment">(+ optional RouteConfig)</span></p>
+                <p><span class="fragment">Template </span><span class="fragment">+ Controller </span><span class="fragment">(+ optional RouteConfig)</span></p>
+            </section>
+        </section>
+        <section id="template">
+            <section>
+                <h3>Template</h3>
+                <pre><code class="hljs html">&ltdiv&gtMy title is {{ title }}&lt/div&gt</code></pre>
+            </section>
+            <section>
+                <h3>Property Bindings</h3>
+                <p>No more ng-x directives</p>
+                <p class="fragment">Instead, we use standard HTML for property binding</p>
+                <div class="fragment">
+                    <pre><code class="hljs html">&lth3 ng-hide="vm.isHidden" ng-class="{active : favoriteHero === hero }" &gt
+  Your favorite hero is: {{ vm.favoriteHero }}
+&lt/h3&gt</code></pre>
+                </div>
+                <div class="fragment">
+                    <p>becomes...</p>
+                    <pre><code class="hljs html">&lth3 [hidden]="isHidden" [class.active]="favoriteHero === hero" &gt
+  Your favorite hero is: {{ favoriteHero }}
+&lt/h3&gt</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>Event Bindings</h3>
+                <p><b>Really</b> no more ng-x directives</p>
+                <p class="fragment">Again, we use standard HTML for event binding</p>
+                <div class="fragment">
+                    <pre><code class="hljs html">&ltinput ng-click="vm.send(foo)"&gtClick me !&lt/input&gt</code></pre>
+                </div>
+                <div class="fragment">
+                    <p>becomes...</p>
+                    <pre><code class="hljs html">&ltinput (click)="send($event)"&gtClick me !&lt/input&gt</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>And the 'magical' two-way binding ?</h3>
+                <p>It disappears, so we have to do it manually</p>
+                <pre><code class="hljs html">&ltinput [value]="hero.firstName"
+       (input)="hero.firstName=$event.target.value" &gt</code></pre>
+            </section>
+            <section data-background="img/deepdive/sad.gif"></section>
+            <section>
+                <h3>NgModel Directive</h3>
+                <p>The API evolves to introduce a syntax for the two-way binding in latest Alpha</p>
+                <pre><code class="hljs html">&ltinput [(ngModel)]="hero.firstname"&gt</code></pre>
+                <p>This syntax is a mix between property and event bindings</p>
+            </section>
+            <section data-background="img/deepdive/twowaybinding.png"></section>
+            <section data-background="img/deepdive/happy.gif"></section>
+            <section>
+                <h3>Structural Directive</h3>
+                <p>All the directive inducing a dom modification outside of the current element are called <b>Structural Directive</b></p>
+                <ul>
+                    <li>ng-if</li>
+                    <li>ng-switch</li>
+                    <li>ng-repeat</li>
+                </ul>
+            </section>
+            <section>
+                <h3>The syntax is a kind of special...</h3>
+                <pre><code class="hljs html">&ltp *ngIf="condition"&gt
+  condition is true and ngIf is true.
+&lt/p&gt</code></pre>
+                <pre><code class="hljs html">&lttr *ngFor="#movie of movies"&gt{{movie.name}}&lt/tr&gt</code></pre>
+                <p class="fragment">But Why ?</p>
+            </section>
+            <section>
+                <h3>Using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">HTML Template Element</a></h3>
+                <pre><code class="hljs html">&lttemplate&gt
+    &ltdiv&gtA super template !&lt/div&gt
+&lt/template&gt</code></pre>
+                <p>This template isn't rendered by the browser but can be used</p>
+            </section>
+            <section>
+                <h3>Angular transform template into script</h3>
+            </section>
+            <section>
+                <h3>The asterisk (*) effect</h3>
+                <pre><code class="hljs html">&lt;p *ngIf="condition"&gt;
+    A super template !
+&lt;/p&gt;</code></pre>
+                <pre><code class="hljs html">&lt;template [ngIf]="condition"&gt;
+  &lt;p&gt;
+    A super template !
+  &lt;/p&gt;
+&lt;/template&gt;</code></pre>
+                <p class="fragment">So, the * is just a syntaxic sugar</p>
+                <p class="fragment">And we can write our own Structural Directive !</p>
+            </section>
+            <section>
+                <h3>Local template variable</h3>
+                <p>We can define a template variable associated to a dom element</p>
+                <pre><code class="hljs html">&ltvideo #player src="foo.mp4"&gt&lt/video&gt
+&ltbutton (click)="player.play()"&gt&lt/button&gt</code></pre>
+            </section>
+        </section>
+        <section id="controller">
+            <section>
+                <h3>Controller</h3>
+                <p>Still holding all the logic of the component</p>
+                <p>And compared to Angular1, a component is a tiny "App"</p>
+            </section>
+            <section>
+                <h3>Shell up a Component Declaration</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt;`
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+}</code></pre>
+            </section>
+            <section>
+                <h3>Using a service in my component</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt;`
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+
+  constructor(private _myService : MyService){} // DI in constructor
+
+}</code></pre>
+            </section>
+            <section data-background="img/deepdive/firsterror.gif"></section>
+            <section>
+            <h3>Using a service in my component</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt;`,
+ providers : [ MyService ] // Do you remember the injector part ?
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+
+  constructor(private _myService : MyService){} // DI in constructor
+
+}</code></pre>
+            </section>
+            <section>
+                <h3>And now a sub component...</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+
+@Component({
+ selector: 'todo',
+ template: `
+    &lt;h1&gt;{{ title }}&lt;/h1&gt;
+    &lt;emitter&gt;&lt;/emitter&gt;
+ `,
+ providers : [ MyService ] // Do you remember the injector part ?
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+
+  constructor(private _myService : MyService){} // DI in constructor
+
+}</code></pre>
+            </section>
+            <section>
+                <h3>Nothing... </h3>
+                <p>Image Merlin...</p>
+            </section>
+            <section>
+                <h3>And now a sub component...</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+import { EmitterComponent } from "./emitter.component";
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt; &lt;emitter&gt;&lt;/emitter&gt;`,
+ directives : [ EmitterComponent ] // Inclusion of all subComp needed
+ providers : [ MyService ]
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+  constructor(private _myService : MyService){}
+}</code></pre>
+            </section>
+            <section>
+                <h3>Why so complicated ?</h3>
+                <ul>
+                    <li>Allow Singleton / Multiple service for part of app</li>
+                    <li>Avoid name conflict in html</li>
+                    <li>All system handle in same place !</li>
+                </ul>
             </section>
             <section data-transition="none-out">
-                <h3>And Components have an intuitive LifeCycle</h3>
+                <h3>Now, Components have an intuitive LifeCycle</h3>
                 <ul>
                     <li><b>OnChange</b><span class="fragment"> - input|output binding value changes</span></li>
                     <li><b>OnInit</b><span class="fragment"> - after the 1st OnChange</span></li>
@@ -483,95 +684,6 @@ export class TodoComp implements OnInit {
   }
 }</code></pre>
             <p class="fragment">No more headache with [pre|post]link and compile</p>
-            </section>
-
-<!--            <section>
-                <h3>How to start my app ?</h3>
-                <p class="fragment">No more ng-app, directly from js</p>
-                <pre class="fragment"><code class="hljs javascript">// main.ts
-import {bootstrap} from 'angular2/platform/browser';
-import {AppComponent} from './app.component';
-
-bootstrap(AppComponent);</code></pre>
-            </section>
-            <section>
-                <h3>Component</h3>
-                <pre><code>@Component({
-    selector: 'my-app',
-    templateUrl : 'app.html'
-})
-export class AppComponent{}</code></pre>
-                <pre class="fragment"><code class="hljs html">&ltmy-app&gtLoading...&lt/my-app&gt</code></pre>
-            </section>-->
-        </section>
-        <section id="template">
-            <section>
-                <h3>Template</h3>
-                <pre><code class="hljs html">&ltdiv&gtMy title is {{ title }}&lt/div&gt</code></pre>
-            </section>
-            <section>
-                <h3>Property Bindings</h3>
-                <p>No more ng-XXX directives</p>
-                <p class="fragment">Instead, we use standard HTML for property binding</p>
-                <div class="fragment">
-                    <pre><code class="hljs html">&lth3 ng-hide="vm.isHidden" ng-class="{active : favoriteHero === hero }" &gt
-  Your favorite hero is: {{ vm.favoriteHero }}
-&lt/h3&gt</code></pre>
-                </div>
-                <div class="fragment">
-                    <p>becomes...</p>
-                    <pre><code class="hljs html">&lth3 [hidden]="isHidden" [class.active]="favoriteHero === hero" &gt
-  Your favorite hero is: {{ favoriteHero }}
-&lt/h3&gt</code></pre>
-                </div>
-            </section>
-            <section>
-                <h3>Event Bindings</h3>
-                <p>Really no more ng-XXX directives</p>
-                <p class="fragment">Again, we use standard HTML for event binding</p>
-                <div class="fragment">
-                    <pre><code class="hljs html">&ltinput ng-click="vm.send(foo)"&gtClick me !&lt/input&gt</code></pre>
-                </div>
-                <div class="fragment">
-                    <p>becomes...</p>
-                    <pre><code class="hljs html">&ltinput (click)="send($event)"&gtClick me !&lt/input&gt</code></pre>
-                </div>
-            </section>
-            <section>
-                <h3>And the 'magical' two-way binding ?</h3>
-                <p>It disappears (in Angular2 Apha), so we have to do it manually</p>
-                <pre><code class="hljs html">&ltinput [value]="hero.firstName"
-       (input)="hero.firstName=$event.target.value" &gt</code></pre>
-            </section>
-            <section data-background="img/deepdive/sad.gif"></section>
-            <section>
-                <h3>NgModel Directive</h3>
-                <p>The API evolves to introduce a syntax for the two-way binding in latest Alpha</p>
-                <pre><code class="hljs html">&ltinput [(ngModel)]="hero.firstname"&gt</code></pre>
-                <p>This syntax is a mix between property and event bindings</p>
-            </section>
-            <section data-background="img/deepdive/twowaybinding.png"></section>
-            <section>
-                <h3>Structural Directive</h3>
-                <p>All the directive inducing a dom modification outside of the current element are called <b>Structural Directive</b></p>
-                <ul>
-                    <li>ng-if</li>
-                    <li>ng-switch</li>
-                    <li>ng-repeat</li>
-                </ul>
-            </section>
-            <section>
-                <h3>In Angular2, the syntax is kind of special...</h3>
-                <pre><code class="hljs html">&ltp *ngIf="condition"&gt
-  condition is true and ngIf is true.
-&lt/p&gt</code></pre>
-                <pre><code class="hljs html">&lttr *ngFor="#movie of movies"&gt{{movie.name}}&lt/tr&gt</code></pre>
-            </section>
-            <section>
-                <h3>Local template variable</h3>
-                <p>We can define a template variable associated to a dom element</p>
-                <pre><code class="hljs html">&ltvideo #player src="foo.mp4"&gt&lt/video&gt
-&ltbutton (click)="player.play()"&gt&lt/button&gt</code></pre>
             </section>
         </section>
     </div>
