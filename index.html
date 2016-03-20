@@ -671,19 +671,101 @@ export class TodoComp {
             </section>
             <section>
                 <h3>And we can use Interface to declare it</h3>
-                <pre><code class="hljs javascript">import { Component, OnInit } from 'angular2/core';
+                <pre><code class="hljs typescript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+import { EmitterComponent } from "./emitter.component";
 
 @Component({
  selector: 'todo',
- templateUrl: '../partials/todo.html'
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt; &lt;emitter&gt;&lt;/emitter&gt;`,
+ directives : [ EmitterComponent ] // Inclusion of all subComp needed
+ providers : [ MyService ]
 })
 export class TodoComp implements OnInit {
-  constructor(private heroService: HeroService, private routeParams: RouteParams){}
-  ngOnInit() {
-    console.log('The Component is initialised');
-  }
+  public title : String = 'A super presentation !!';
+  constructor(private _myService : MyService){}
+
+  ngOnInit() { console.log('The Component is initialised'); }
 }</code></pre>
             <p class="fragment">No more headache with [pre|post]link and compile</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Communication</h3>
+                <p>We have now a component, but we want to communicate with other element</p>
+                <p>How could we do that without any DDO ?</p>
+            </section>
+            <section>
+                <h3>Again, all is in component</h3>
+            </section>
+            <section>
+                <h3>Input(s)</h3>
+                <pre class="fragment"><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input() counterValue = 0;
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs typescript">&lt;counter [counterValue]=&quot;10&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Inputs(s) with Alias</h3>
+                <pre><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input('start') counterValue = 0;
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs typescript">&lt;counter [start]=&quot;10&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Output(s) as Events !</h3>
+                <pre class="fragment"><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input('start') counterValue = 0;
+  @Output() onChangeEmitter = new EventEmitter&lt;Event&gt;();
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (onChangeEmitter)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Output(s) with alias too (of course...)</h3>
+                <pre class="fragment"><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input('start') counterValue = 0;
+  @Output('onChange') onChangeEmitter = new EventEmitter&lt;Event&gt;();
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (onChange)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Bi-Directionnal communicatin</h3>
+                <ul>
+                    <li>[Input] as data-binding</li>
+                    <li>(Output) as event-binding</li>
+                </ul>
+                <div class="fragment">
+                    <p>No more : </p>
+                    <ul>
+                        <li>Is it data-binding, value-binding, function binding ?</li>
+                        <li>Do I have to write it with controller attribute or with interpollation {{ ? }}</li>
+                    </ul>
+                </div>
             </section>
         </section>
     </div>
