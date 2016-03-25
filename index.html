@@ -67,6 +67,7 @@
                 <li><a href="#/languages">Many languages...</a></li>
                 <li><a href="#/deepdive">Deep dive in Angular2</a></li>
                 <li><a href="#/beyondthehtml">Beyond the HTML</a></li>
+                <li><a href="#/migration">Migration</a></li>
             </ul>
         </section>
 
@@ -101,7 +102,14 @@
             </section>
             <section>
                 <h3>It's not backward-compatible...</h3>
-                <p class="fragment">It's <b>True</b><span class="fragment"> but the AngularTeam have something to help the migration...</span></p>
+                <p class="fragment">It's <b>True</b>
+                    <span class="fragment"> but</span>
+                    <span class="fragment"> the AngularTeam have something to help the migration...</span></p>
+            </section>
+            <section>
+                <h3>Angular1 is dying ?</h3>
+                <p><b>No</b><span class="fragment">It will be supported during two years after the release of Angular2</span></p>
+                <p>And your app won't stop working after this...</p>
             </section>
         </section>
         <section id="frameworks">
@@ -695,7 +703,7 @@ export class TodoComp implements OnInit {
             <p class="fragment">No more headache with [pre|post]link and compile</p>
             </section>
         </section>
-        <section>
+        <section id="communication">
             <section>
                 <h3>Communication</h3>
                 <p>We have now a component, but we want to communicate with other element</p>
@@ -809,6 +817,42 @@ bootstrap(AppComponent);
 </code></pre>
             </section>
 
+        </section>
+        <section id="migration">
+            <section>
+                <h3>Migration<span class="fragment"> ?</span></h3>
+            </section>
+            <section data-background="img/migration/voldemort.gif"></section>
+            <section>
+                <h3>A migration Path exists</h3>
+                <p>The Angular Team work very hard around a way to transform our AngularJS application in Angular2 App</p>
+            </section>
+            <section>
+                <h3>UpgradeAdapter</h3>
+                <p>A module allowing to <b>Upgrade</b> and <b>Downgrade</b> element of Ng1 and Ng2</p>
+                <ul class="fragment">
+                    <li>Allow new syntax in template</li>
+                    <li>Synchronize $rootScope.$digest with Zones</li>
+                    <li>Create a bridge between DI of two systems</li>
+                </ul>
+            </section>
+            <section data-transition="none-out">
+                <h3>How do we proceed ?</h3>
+                <img src="img/migration/full-angularjs.png" alt="full-angularjs" class="borderless">
+            </section>
+            <section data-transition="none">
+                <h3>How do we proceed ?</h3>
+                <img src="img/migration/mix-ng1-ng2.png" alt="mix-ng1-ng2" class="borderless">
+            </section>
+            <section data-transition="none-in">
+                <h3>How do we proceed ?</h3>
+                <img src="img/migration/full-ng2.png" alt="full-ng2" class="borderless">
+            </section>
+            <section>
+                <h3>My Opinion ?</h3>
+                <p>The most important requirement to do the migration is...</p>
+                <p class="fragment">Good coding style in Angular 1.5+ !</p>
+            </section>
         </section>
     </div>
 
