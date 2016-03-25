@@ -66,7 +66,7 @@
                 <li><a href="#/frameworks">One framework or many framework ?</a></li>
                 <li><a href="#/languages">Many languages...</a></li>
                 <li><a href="#/deepdive">Deep dive in Angular2</a></li>
-                <li>Beyond the browser</li>
+                <li><a href="#/beyondthehtml">Beyond the HTML</a></li>
             </ul>
         </section>
 
@@ -623,12 +623,12 @@ import { MyService } from './myservice';
     &lt;h1&gt;{{ title }}&lt;/h1&gt;
     &lt;emitter&gt;&lt;/emitter&gt;
  `,
- providers : [ MyService ] // Do you remember the injector part ?
+ providers : [ MyService ]
 })
 export class TodoComp {
   public title : String = 'A super presentation !!';
 
-  constructor(private _myService : MyService){} // DI in constructor
+  constructor(private _myService : MyService){}
 
 }</code></pre>
             </section>
@@ -772,6 +772,43 @@ export class CounterCmp {
                     </ul>
                 </div>
             </section>
+        </section>
+        <section id="beyondthehtml">
+            <section>
+                <h3>Beyond the browser...</h3>
+                <p class="fragment">The JS will live out the <i>window</i> element</p>
+            </section>
+            <section data-background="img/beyondthebrowser/what.gif"></section>
+            <section>
+                <h3>A new Era !</h3>
+                <p class="fragment">The progressive Web-App era</p>
+            </section>
+            <section>
+                <h3>Web-Workers</h3>
+                <p>A way to do 'heavy' calculation in another thread</p>
+            </section>
+            <section>
+                <h3>Service-Worker</h3>
+                <p>After Mobile First, <b>Offline-First</b></p>
+                <p>Push notifications, Handle disconnection, synchronisation...</p>
+            </section>
+            <section>
+                <h3>Universal Angular</h3>
+                <p>Also know as Server-Side-Rendering</p>
+                <ul>
+                    <li>Increase performance at first load</li>
+                    <li>Help for SEO</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Angular2 is built upon this principle</h3>
+                <pre class="fragment"><code class="hljs typescript">import {bootstrap} from 'angular2/platform/browser';
+import {AppComponent} from './app.component';
+
+bootstrap(AppComponent);
+</code></pre>
+            </section>
+
         </section>
     </div>
 
