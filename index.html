@@ -770,11 +770,15 @@ export class CounterCmp {
                     <li>(Output) as event-binding</li>
                 </ul>
                 <div class="fragment">
-                    <p>No more : </p>
-                    <ul>
+                    <p>No more of</p>
+                    <!--<ul>
                         <li>Is it data-binding, value-binding, function binding ?</li>
                         <li>Do I have to write it with controller attribute or with interpollation {{ ? }}</li>
-                    </ul>
+                    </ul>-->
+                    <pre><code class="hljs html">&lt;foo bar=&quot;val&quot;&gt;&lt;/foo&gt;
+&lt;foo bar=&quot;{{ val }}&quot;&gt;&lt;/foo&gt;
+&lt;foo bar=&quot;val()&quot;&gt;&lt;/foo&gt;
+&lt;foo bar=&quot;val&quot;&gt;&lt;/foo&gt; &lt;!-- the word 'val', not the value'</code></pre>
                 </div>
             </section>
         </section>
