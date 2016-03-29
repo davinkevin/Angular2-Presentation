@@ -837,6 +837,34 @@ bootstrap(AppComponent);
                     <li>Create a bridge between DI of two systems</li>
                 </ul>
             </section>
+            <section>
+                <h3>Downgrading from ng2 to ng1</h3>
+
+                <pre class="fragment"><code class="hljs javascript">import {UpgradeAdapter} from 'angular2/upgrade';
+
+var adapter = new UpgradeAdapter();
+var app = angular.module('myApp', []);
+
+adapter.bootstrap(document.body, ['myApp']);</code></pre>
+                <pre class="fragment"><code class="hljs javascript">app.directive('productDetail',
+  adapter.downgradeNg2Component(ProductDetail));</code></pre>
+            </section>
+            <section>
+                <h3>Upgrading from ng1 to ng2</h3>
+
+                <pre><code class="hljs javascript">@Component({
+  selector: 'product-list',
+  directives: [
+    adapter.upgradeNg1Component('productListItem')
+  ],
+  template: `&lt;h2&gt;Product List&lt;/h2&gt;
+    &lt;product-list-item [product]=&quot;product&quot;&gt;&lt;/product-list-item&gt;`
+})
+class ProductList {
+  @Input() products: Product[];
+  ...
+}</code></pre>
+            </section>
             <section data-transition="none-out">
                 <h3>How do we proceed ?</h3>
                 <img src="img/migration/full-angularjs.png" alt="full-angularjs" class="borderless">
