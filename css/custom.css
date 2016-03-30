@@ -10,3 +10,7 @@
 .reveal section .split-right {
   float: right;
   width: 50%; }
+
+.muted {
+  color: #999999;
+}
