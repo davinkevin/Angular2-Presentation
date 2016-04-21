@@ -129,6 +129,7 @@
                 <ul>
                     <li><a href="https://github.com/angular/di.js">DI.js</a> (Angular2 dependency injector)</li>
                     <li><a href="https://github.com/angular/zone.js/">Zones.js</a></li>
+                    <li><a href="https://github.com/Reactive-Extensions/RxJS">Observable</a></li>
                     <li><a href="https://github.com/systemjs/systemjs">SystemJs</a></li>
                     <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Native browser API</a></li>
                 </ul>
@@ -245,7 +246,7 @@ setTimeout(b, 0);
 setTimeout(c, 0);
 d();</code></pre>
                 <div class="fragment">
-                <p>Results to </p>
+                    <p>Results to </p>
                 <pre><code class="hljs javascript" data-trim>a
 d
 b
@@ -262,7 +263,7 @@ setTimeout(c, 0);
 d();
 stop();</code></pre>
                 <div class="fragment">
-                <p>Results :</p>
+                    <p>Results :</p>
                 <pre><code class="hljs javascript" data-trim>// Start
 a
 d
@@ -298,8 +299,11 @@ zone
     });</code></pre>
             </section>
             <section>
-                <h3><a href="examples/zones/sort-async.html">Demo time</a></h3>
+                <h3><a target="_blank" href="examples/zones/sort-async.html">Demo time</a></h3>
             </section>
+        </section>
+        <section id="observables">
+
         </section>
         <section id="systemjs">
             <section>
@@ -327,17 +331,34 @@ import { AnotherComp } from './another.comp';</code></pre>
             </section>
             <section data-background="img/systemjs/mrpotato.jpg"><p>&nbsp;</p></section>
             <section>
+                <h3>And we deserve better than... this !</h3>
+                <pre><code class="hljs javascript">(function (global, factory) {
+ typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+   (factory());
+}(this, function () { 'use strict';
+  function myAwesomModule() {
+    ...
+  }
+}));</code></pre>
+            </section>
+            <section>
                 <h3>Only SystemJS ?</h3>
                 <p>No... you can use what you want</p>
-                <div class="split-left">
+                <div class="split-left" style="width: 33%">
                     <img src="img/systemjs/webpack.png" alt="webpack" height="192">
                     <br>
                     <a href="https://webpack.github.io/docs/">Webpack</a>
                 </div>
-                <div class="split-right">
+                <div class="split-left" style="width: 33%">
                     <img src="img/systemjs/jspm.png" alt="jspm" height="192">
                     <br>
                     <a href="http://jspm.io/">JSPM</a>
+                </div>
+                <div class="split-left" style="width: 33%">
+                    <img src="img/systemjs/rollupjs.svg" alt="rollupjs" height="192">
+                    <br>
+                    <a href="http://rollupjs.org/">Rollup.js</a>
                 </div>
             </section>
         </section>
@@ -600,7 +621,7 @@ export class TodoComp {
             </section>
             <section data-background="img/deepdive/firsterror.gif"><p>&nbsp;</p></section>
             <section>
-            <h3>Using a service in my component</h3>
+                <h3>Using a service in my component</h3>
                 <pre><code class="hljs javascript">import { Component } from 'angular2/core';
 import { MyService } from './myservice';
 
@@ -693,7 +714,7 @@ export class TodoComp implements OnInit {
 
   ngOnInit() { console.log('The Component is initialised'); }
 }</code></pre>
-            <p class="fragment">No more headache with [pre|post]link and compile</p>
+                <p class="fragment">No more headache with [pre|post]link and compile</p>
             </section>
         </section>
         <section id="communication">
@@ -910,6 +931,7 @@ class ProductList {
                 <h3>Thank you</h3>
                 <p class="fragment">Any questions ?</p>
             </section>
+            <section data-background="img/dropthemic.gif">&nbsp;</section>
         </section>
     </div>
 
