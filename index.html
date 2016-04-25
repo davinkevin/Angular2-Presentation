@@ -103,12 +103,11 @@
             <section>
                 <h3>It's not backward-compatible...</h3>
                 <p class="fragment">It's <b>True</b>
-                    <span class="fragment"> but</span>
-                    <span class="fragment"> the AngularTeam have something to help the migration...</span></p>
+                    <span class="fragment"> but the AngularTeam have something to help the migration...</span></p>
             </section>
             <section>
                 <h3>Angular1 is dying ?</h3>
-                <p class="fragment"><b>No </b><span class="fragment">It will be supported during two years after the release of Angular2</span></p>
+                <p class="fragment"><b>No</b><span class="fragment">, It will be supported during two years after the release of Angular2</span></p>
                 <p class="fragment">And your app won't stop working after this...</p>
             </section>
         </section>
@@ -303,7 +302,22 @@ zone
             </section>
         </section>
         <section id="observables">
-
+            <section>
+                <h3>Observables</h3>
+            </section>
+            <section data-background="img/observables/observables.gif"> &nbsp; </section>
+            <section>
+                <h3>Definition</h3>
+                <blockquote cite="http://cycle.js.org/observables.html">
+                    &ldquo;Observables are lazy event streams which can emit zero or more events, and may or may not finish.&rdquo;
+                </blockquote>
+            </section>
+            <section>
+                <h3>How many time did you write this ?</h3>
+                <pre><code class="hljs javascript">$scope.$watch('foo.bar', (newVal, oldVal) => {
+    ...
+});</code></pre>
+            </section>
         </section>
         <section id="systemjs">
             <section>
