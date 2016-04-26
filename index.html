@@ -318,6 +318,33 @@ zone
     ...
 });</code></pre>
             </section>
+            <section>
+                <h3>Or this ?</h3>
+                <pre><code class="hljs javascript">$scope.$watch('foo.bar', (newVal, oldVal) => {
+    if (newVal.length <= 0)
+        return;
+    let firstTransformation = removeSpaces(newVal);
+    let secondTransoformation = firstTransformation.toUpperCase();
+    $scope.result = thirdTransformation;
+});</code></pre>
+            </section>
+            <section>
+                <h3>RxJS</h3>
+                <img src="img/observables/logo.png" alt="rxjs" class="borderless" width="256" >
+            </section>
+            <section>
+                <h3>Simpler !</h3>
+                <p>We can write our previous $watch</p>
+                <pre><code class="hljs javascript">foo.bar$
+    .filter(v => v.length > 0)
+    .map(v => removeSpaces(newVal))
+    .map(v => v.toUpperCase())
+    .subscribe(v => $scope.result = v);
+</code></pre>
+            </section>
+            <section>
+                <h3>And we have a lots of operator !</h3>
+            </section>
         </section>
         <section id="systemjs">
             <section>
