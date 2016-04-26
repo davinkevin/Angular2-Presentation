@@ -950,6 +950,35 @@ export class CounterCmp {
                 </div>
             </section>
         </section>
+        <section id="service">
+            <section>
+                <h3>Service</h3>
+                <p>It's where the logic of your app should be...</p>
+            </section>
+            <section>
+                <h3>Question</h3>
+                <img src="img/deepdive/service-choose.jpg" alt="wwtbm" width="750">
+            </section>
+            <section>
+                <h3>And you think Angular2 is more complicated ?</h3>
+                <p>We can declare a service like this</p>
+                <pre><code class="hljs javascript">export class MyService{}</code></pre>
+                <pre class="fragment"><code class="hljs javascript">providers : [ MyService ]</code></pre>
+            </section>
+            <section>
+                <h3>@Injectable</h3>
+                <p>Just need one decorator to allow DI</p>
+                <pre><code class="hljs javascript">import {Injectable} from 'angular2/core';
+
+@Injectable()
+export class MyService{
+ constructor(private _http : http){}
+}</code></pre>
+            </section>
+        </section>
+        <section>
+
+        </section>
         <section id="beyondthehtml">
             <section>
                 <h3>Beyond the browser...</h3>
