@@ -334,16 +334,94 @@ zone
             </section>
             <section>
                 <h3>Simpler !</h3>
-                <p>We can write our previous $watch</p>
-                <pre><code class="hljs javascript">foo.bar$
+                <p>We can write our previous $watch like this...</p>
+                <pre><code class="hljs javascript">foo.bar$ // An Observable
     .filter(v => v.length > 0)
-    .map(v => removeSpaces(newVal))
+    .map(v => removeSpaces(v))
     .map(v => v.toUpperCase())
-    .subscribe(v => $scope.result = v);
+    .subscribe(
+        v => $scope.result = v /* An Observer */
+    );
 </code></pre>
             </section>
             <section>
                 <h3>And we have a lots of operator !</h3>
+                <div style="float: left; width: 33%; font-size: 75%" class="fragment">
+                    <ul>
+                        <li>create</li>
+                        <li>range</li>
+                        <li>using</li>
+                        <li>from</li>
+                        <li>of</li>
+                        <li>toPromise</li>
+                        <li>toMap</li>
+                        <li>toSet</li>
+                        <li>toArray</li>
+                        <li>amb</li>
+                        <li>combineLatest</li>
+                        <li>concat</li>
+                        <li>startWith</li>
+                        <li>merge</li>
+                        <li>repeat</li>
+                    </ul>
+                </div>
+                <div style="float: left; width: 33%; font-size: 75%" class="fragment">
+                    <ul>
+                        <li>withLatestFrom</li>
+                        <li>zip</li>
+                        <li>publish</li>
+                        <li>replay</li>
+                        <li>aggregate</li>
+                        <li>average</li>
+                        <li>count</li>
+                        <li>max</li>
+                        <li>min</li>
+                        <li>reduce</li>
+                        <li>sum</li>
+                        <li>debounce</li>
+                        <li>interval</li>
+                        <li>filter</li>
+                        <li>map</li>
+                    </ul>
+                </div>
+                <div style="float: left; width: 33%; font-size: 75%" class="fragment">
+                    <ul>
+                        <li>elementAtOrDefault</li>
+                        <li>flatMap</li>
+                        <li>findIndex</li>
+                        <li>first</li>
+                        <li>pluck</li>
+                        <li>select</li>
+                        <li>single</li>
+                        <li>take</li>
+                        <li>takeLast</li>
+                        <li>where</li>
+                        <li>buffer</li>
+                        <li>groupBy</li>
+                        <li>join</li>
+                        <li>windowd</li>
+                        <li>do</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h3>Any documentation ?</h3>
+                <p>Yes, and it's very fun !</p>
+                <a href="http://rxmarbles.com/#map" target="_blank"><img src="img/observables/marble.map.png" alt="map"></a>
+            </section>
+            <section>
+                <h3>Good to know...</h3>
+                <p>Observable are immutable and composable</p>
+                <pre><code class="hljs javascript">let obs$ = Rx.Observable.from(1, 2, 3, 4, 5);
+obs.subscribe(x => console.log(x)); // 1, 2, 3, 4, 5
+
+let evenObs$ = obs.filter(x => x%2);
+evenObs$.subscribe(x => console.log(x)) // 2, 4
+evenObs$.map(x => x*2).subscribe(x => console.log(x)) // 4, 8
+</code></pre>
+            </section>
+            <section>
+                <img src="img/observables/everywhere.jpg" alt="observable-everywhere">
             </section>
         </section>
         <section id="systemjs">
@@ -401,6 +479,14 @@ import { AnotherComp } from './another.comp';</code></pre>
                     <br>
                     <a href="http://rollupjs.org/">Rollup.js</a>
                 </div>
+            </section>
+            <section>
+                <h3>For information...</h3>
+                <ul>
+                    <li>Webpack 2 will try to fill the gap between Webpack 1 and JSPM/Rollup</li>
+                    <li>JSPM uses Rollup.Js for the build and tree-shaking</li>
+                    <li>The AngularTeam use Rollup to build Angular2 right now</li>
+                </ul>
             </section>
         </section>
         <section id="nativebrowserapi">
