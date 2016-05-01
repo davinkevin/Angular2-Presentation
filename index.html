@@ -415,7 +415,7 @@ zone
                 <pre><code class="hljs javascript">let obs$ = Rx.Observable.from(1, 2, 3, 4, 5);
 obs.subscribe(x => console.log(x)); // 1, 2, 3, 4, 5
 
-let evenObs$ = obs.filter(x => x%2);
+let evenObs$ = obs.filter(x => x%2 == 0 ));
 evenObs$.subscribe(x => console.log(x)) // 2, 4
 evenObs$.map(x => x*2).subscribe(x => console.log(x)) // 4, 8
 </code></pre>
@@ -624,7 +624,7 @@ export class TodoComp {
         private routeParams: RouteParams
     ){}
 
-    select(todo){...}
+    select(todo : Todo) : Boolean {...}
 }</code></pre>
             </section>
         </section>
@@ -706,7 +706,7 @@ export class TodoComp {
                 <pre><code class="hljs html">&ltp *ngIf="condition"&gt
   condition is true and ngIf is true.
 &lt/p&gt</code></pre>
-                <pre><code class="hljs html">&lttr *ngFor="#movie of movies"&gt{{movie.name}}&lt/tr&gt</code></pre>
+                <pre><code class="hljs html">&lttr *ngFor="let movie of movies"&gt{{movie.name}}&lt/tr&gt</code></pre>
                 <p class="fragment">But Why ?</p>
             </section>
             <section>
@@ -912,10 +912,10 @@ export class CounterCmp {
 })
 export class CounterCmp {
   @Input('start') counterValue = 0;
-  @Output() onChangeEmitter = new EventEmitter&lt;Event&gt;();
+  @Output() stateEmitter = new EventEmitter&lt;State&gt;();
 }
 </code></pre>
-                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (onChangeEmitter)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
+                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (stateEmitter)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
             </section>
             <section>
                 <h3>Output(s) with alias too (of course...)</h3>
@@ -926,10 +926,14 @@ export class CounterCmp {
 })
 export class CounterCmp {
   @Input('start') counterValue = 0;
-  @Output('onChange') onChangeEmitter = new EventEmitter&lt;Event&gt;();
+  @Output('finish') stateEmitter = new EventEmitter&lt;State&gt;();
+
+  finish() {
+    stateEmitter.emit(myState);
+  }
 }
 </code></pre>
-                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (onChange)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
+                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (finish)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
             </section>
             <section>
                 <h3>Bi-Directional communication</h3>
@@ -993,8 +997,88 @@ export class MyService{
                 <h3>Ng-Route was too simple</h3>
                 <div class="fragment">
                     <img src="img/router/ui.png" alt="ui" class="borderless" width="256">
-                    <p>The UI-Router alternative is quite popular</p>
+                    <p>The UI-Router alternative was quite popular</p>
                 </div>
+            </section>
+            <section>
+                <h3>The Router provide now</h3>
+                <ul>
+                    <li>Named Route</li>
+                    <li>Dedicated @RouteConfig and Directive</li>
+                    <li>Hierarchical Route</li>
+                    <li>Concurrent Route</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Configurable Change-Detection</h3>
+                <ul>
+                    <li>1 digest cycle allow to treat the whole app</li>
+                    <li>You can alter the Change detection behavior</li>
+                    <li>Optimized for immutability</li>
+                </ul>
+            </section>
+            <section>
+                <h3>View Encapsulation mode</h3>
+                <p>We can encapsulate everything, and we can do it by multiple way</p>
+            </section>
+            <section>
+                <h3>For a given Component</h3>
+                <pre><code class="hljs javascript">import {ViewEncapsulation} from 'angular2/core';
+
+@Component({
+  selector: 'comp',
+  templateUrl: '&lt;div class=&quot;my-comp&quot;&gt;An encapsulated comp&lt;/div&gt;',
+  styles: [`.my-comp { background: green; }`],
+  encapsulation: ViewEncapsulation.Emulated
+})
+class Comp {}</code></pre>
+            </section>
+            <section>
+                <h3>Emulated</h3>
+                <p>Which is the default encapsulation system</p>
+                <pre class="fragment"><code class="hljs">&lt;head&gt;
+ &lt;style&gt;.my-comp[_ngcontent-1] {background: green;}&lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                <pre class="fragment"><code class="hljs">&lt;comp _ngcontent-0 _nghost-1&gt;
+ &lt;div class=&quot;my-comp&quot; _ngcontent-1&gt;
+  An encapsulated comp
+ &lt;/div&gt;
+&lt;/comp&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Native</h3>
+                <p>Which uses the Shadow-DOM</p>
+                <pre><code>encapsulation: ViewEncapsulation.Native</code></pre>
+                <pre class="fragment"><code class="hljs">&lt;comp&gt;
+ #shadow-root
+ | &lt;style&gt;
+ |  .my-comp { background: green; }
+ | &lt;/style&gt;
+ | &lt;div class=&quot;my-comp&quot;&gt;An encapsulated comp&lt;/div&gt;
+&lt;/comp&gt;</code></pre>
+            </section>
+            <section>
+                <h3>None</h3>
+                <p>Take care of Side effect !</p>
+                <pre><code>encapsulation: ViewEncapsulation.None</code></pre>
+               <pre class="fragment"><code class="hljs">&lt;head&gt;
+ &lt;style&gt;.my-comp {background: green;}&lt;/style&gt;
+&lt;/head&gt;</code></pre>
+            <pre class="fragment"><code class="hljs">&lt;comp _nghost-1&gt;
+ &lt;div class=&quot;my-comp&quot;&gt;
+  An encapsulated comp
+ &lt;/div&gt;
+&lt;/comp&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Angular-CLI</h3>
+                <p>Derived from ember-cli</p>
+                <pre><code class="hljs bash">$ ng new project
+$ ng generate component my-new-component
+$ ng build
+$ ng test
+$ ng e2e
+$ ng server</code></pre>
             </section>
         </section>
         <section id="beyondthehtml">
@@ -1128,6 +1212,11 @@ class ProductList {
             <section>
                 <h3>Thank you</h3>
                 <p class="fragment">Any questions ?</p>
+            </section>
+            <section>
+                <h3>Say if you like this presentation ?</h3>
+                <img src="img/qrcode.png" alt="qrcode">
+                <p>http://goo.gl/j1UmGA</p>
             </section>
             <section data-background="img/dropthemic.gif">&nbsp;</section>
         </section>
