@@ -929,7 +929,7 @@ export class CounterCmp {
   @Output('finish') stateEmitter = new EventEmitter&lt;State&gt;();
 
   finish() {
-    stateEmitter.emit(myState);
+    this.stateEmitter.emit(myState);
   }
 }
 </code></pre>
