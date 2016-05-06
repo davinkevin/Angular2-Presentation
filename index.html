@@ -928,6 +928,7 @@ export class CounterCmp {
 export class CounterCmp {
   @Input('start') counterValue = 0;
   @Output('finish') stateEmitter = new EventEmitter&lt;State&gt;();
+  myState : State = { numberOfStop : 0, startDate : Date.now(), finishDate : null };
 
   finish() {
     this.stateEmitter.emit(myState);
